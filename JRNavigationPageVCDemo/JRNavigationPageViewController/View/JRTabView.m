@@ -50,7 +50,8 @@
             CGSize size = [title sizeWithAttributes:dict];
             CGFloat buttonWidth = size.width;
             [self.widthArrays addObject:@(buttonWidth)];
-            width += buttonWidth;
+            CGFloat maxWidth = [[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue];
+            width += maxWidth;
             if (![title isEqualToString:[titles lastObject]]) {
                 width += 15;
             }
@@ -70,7 +71,7 @@
 - (UIView *)lineView{
     if (!_lineView) {
         _lineView = [[UIView alloc]init];
-        [_lineView setBackgroundColor:[UIColor colorWithRed:42 green:187 blue:180 alpha:1.0]];
+        [_lineView setBackgroundColor:[UIColor colorWithRed:42.0f / 255 green:187.0f / 255 blue:180.0f / 255 alpha:1.0]];
     }
     return _lineView;
 }
@@ -89,10 +90,11 @@
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:self.infoArray[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:51 green:51 blue:51 alpha:1.0] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:42 green:187 blue:180 alpha:1.0] forState:UIControlStateHighlighted];
-        [button setTitleColor:[UIColor colorWithRed:42 green:187 blue:180 alpha:1.0] forState:UIControlStateSelected];
+        [button setTitleColor:[UIColor colorWithRed:51.0f / 255 green:51.0f / 255 blue:51.0f /255 alpha:1.0] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:42.0f / 255 green:187.0f / 255 blue:180.0f / 255 alpha:1.0] forState:UIControlStateHighlighted];
+        [button setTitleColor:[UIColor colorWithRed:42.0f / 255 green:187.0f / 255 blue:180.0f / 255 alpha:1.0] forState:UIControlStateSelected];
         button.titleLabel.font = [UIFont systemFontOfSize:15];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
         [button addTarget:self action:@selector(itemChanageAction:) forControlEvents:UIControlEventTouchUpInside];
         
         if (i == 0) {
@@ -103,7 +105,7 @@
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
             make.height.mas_equalTo(44);
-            make.left.mas_equalTo(i * ([self.widthArrays[i] intValue] + 15));
+            make.left.mas_equalTo(i * ([[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue] + 15));
             if (i == (self.infoArray.count - 1)) {
                 make.right.mas_equalTo(0);
             }
@@ -136,6 +138,11 @@
 
 - (void)chanageTagWithIndex:(CGFloat)index{
     
+    
+    if (CGRectEqualToRect(self.lineView.frame, CGRectZero)) {
+        return;
+    }
+    
     for (UIButton *button in self.buttonArray) {
         button.selected = NO;
     }
@@ -143,10 +150,9 @@
     UIButton *button = [self.buttonArray objectAtIndex:index];
     button.selected = YES;
     
-    CGFloat padding = index * ([self.widthArrays[(int)index] intValue] + 15);
+    CGFloat padding = index * ([[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue] + 15);
     
     [self.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo([self.widthArrays[(int)index] intValue]);
         make.left.mas_equalTo(padding);
     }];
     

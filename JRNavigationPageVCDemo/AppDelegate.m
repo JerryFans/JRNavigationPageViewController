@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "JRNavigationPageViewController.h"
+#import "JRNavigationPageVCDemo-Swift.h"
+#import "JRNavigationPageViewController.h"
+#import "OCViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +21,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    
+    JRNavigationPageViewController *pageVc = [[JRNavigationPageViewController alloc]initWithViewControlers:^NSArray<UIViewController *> *{
+        
+        return @[[[OCViewController alloc] init],[[SwiftViewController alloc]init]];
+        
+        
+    } andTitles:^NSArray<NSString *> *{
+        return @[@"Object-C",@"Swift"];
+    }];
+    
+    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:pageVc];
+    self.window.rootViewController = navi;
+    //设定window的背景颜色clear
+    self.window.backgroundColor = [UIColor clearColor];
+    //显示
+    [self.window makeKeyAndVisible];
+    
+    
+    [[UINavigationBar appearance]setBackgroundColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
+    
     return YES;
 }
 

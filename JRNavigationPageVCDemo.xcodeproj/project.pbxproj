@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		432E05F281A2F728ADB1FCA5 /* libPods-JRNavigationPageVCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9142EB5E904B946C2D371F60 /* libPods-JRNavigationPageVCDemo.a */; };
+		B42C40AD1F1718D200E033BD /* OCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42C40AC1F1718D200E033BD /* OCViewController.m */; };
+		B42C40B51F172B2400E033BD /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C40B41F172B2400E033BD /* SwiftViewController.swift */; };
 		B4804C471F14D51100E639AB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4804C461F14D51100E639AB /* AppDelegate.m */; };
-		B4804C4A1F14D51100E639AB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4804C491F14D51100E639AB /* ViewController.m */; };
-		B4804C4D1F14D51100E639AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4804C4B1F14D51100E639AB /* Main.storyboard */; };
 		B4804C4F1F14D51100E639AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4804C4E1F14D51100E639AB /* Assets.xcassets */; };
 		B4804C521F14D51100E639AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4804C501F14D51100E639AB /* LaunchScreen.storyboard */; };
 		B4804C551F14D51100E639AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4804C541F14D51100E639AB /* main.m */; };
@@ -22,12 +22,13 @@
 /* Begin PBXFileReference section */
 		20D4FE6AA9FCB89ABA8A5054 /* Pods-JRNavigationPageVCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRNavigationPageVCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JRNavigationPageVCDemo/Pods-JRNavigationPageVCDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9142EB5E904B946C2D371F60 /* libPods-JRNavigationPageVCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JRNavigationPageVCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B42C40AB1F1718D200E033BD /* OCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCViewController.h; sourceTree = "<group>"; };
+		B42C40AC1F1718D200E033BD /* OCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCViewController.m; sourceTree = "<group>"; };
+		B42C40B11F17268C00E033BD /* JRNavigationPageVCDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JRNavigationPageVCDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		B42C40B41F172B2400E033BD /* SwiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftViewController.swift; sourceTree = "<group>"; };
 		B4804C421F14D51100E639AB /* JRNavigationPageVCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JRNavigationPageVCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4804C451F14D51100E639AB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B4804C461F14D51100E639AB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B4804C481F14D51100E639AB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B4804C491F14D51100E639AB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		B4804C4C1F14D51100E639AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B4804C4E1F14D51100E639AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4804C511F14D51100E639AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4804C531F14D51100E639AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +54,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B42C40A61F1718AC00E033BD /* OCViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B42C40A91F1718C500E033BD /* Controller */,
+				B42C40AA1F1718C500E033BD /* Model */,
+				B42C40A81F1718C500E033BD /* View */,
+			);
+			path = OCViewController;
+			sourceTree = "<group>";
+		};
+		B42C40A71F1718AC00E033BD /* SwiftViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B42C40AF1F17266A00E033BD /* Controller */,
+				B42C40AE1F17266A00E033BD /* Model */,
+				B42C40B01F17266A00E033BD /* View */,
+			);
+			path = SwiftViewController;
+			sourceTree = "<group>";
+		};
+		B42C40A81F1718C500E033BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B42C40A91F1718C500E033BD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B42C40AB1F1718D200E033BD /* OCViewController.h */,
+				B42C40AC1F1718D200E033BD /* OCViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B42C40AA1F1718C500E033BD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B42C40AE1F17266A00E033BD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B42C40AF1F17266A00E033BD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B42C40B11F17268C00E033BD /* JRNavigationPageVCDemo-Bridging-Header.h */,
+				B42C40B41F172B2400E033BD /* SwiftViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B42C40B01F17266A00E033BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B4804C391F14D51100E639AB = {
 			isa = PBXGroup;
 			children = (
@@ -77,9 +144,8 @@
 				B4804C5B1F14D77300E639AB /* JRNavigationPageViewController */,
 				B4804C451F14D51100E639AB /* AppDelegate.h */,
 				B4804C461F14D51100E639AB /* AppDelegate.m */,
-				B4804C481F14D51100E639AB /* ViewController.h */,
-				B4804C491F14D51100E639AB /* ViewController.m */,
-				B4804C4B1F14D51100E639AB /* Main.storyboard */,
+				B42C40A61F1718AC00E033BD /* OCViewController */,
+				B42C40A71F1718AC00E033BD /* SwiftViewController */,
 				B4804C4E1F14D51100E639AB /* Assets.xcassets */,
 				B4804C501F14D51100E639AB /* LaunchScreen.storyboard */,
 				B4804C531F14D51100E639AB /* Info.plist */,
@@ -176,6 +242,7 @@
 				TargetAttributes = {
 					B4804C411F14D51100E639AB = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -204,7 +271,6 @@
 			files = (
 				B4804C521F14D51100E639AB /* LaunchScreen.storyboard in Resources */,
 				B4804C4F1F14D51100E639AB /* Assets.xcassets in Resources */,
-				B4804C4D1F14D51100E639AB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,26 +329,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4804C4A1F14D51100E639AB /* ViewController.m in Sources */,
 				B4804C551F14D51100E639AB /* main.m in Sources */,
 				B4804C671F14D78900E639AB /* JRTabView.m in Sources */,
+				B42C40AD1F1718D200E033BD /* OCViewController.m in Sources */,
 				B4804C651F14D78100E639AB /* JRNavigationPageViewController.m in Sources */,
 				B4804C661F14D78700E639AB /* JRTabScrollView.m in Sources */,
 				B4804C471F14D51100E639AB /* AppDelegate.m in Sources */,
+				B42C40B51F172B2400E033BD /* SwiftViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B4804C4B1F14D51100E639AB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B4804C4C1F14D51100E639AB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B4804C501F14D51100E639AB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -399,12 +458,16 @@
 			baseConfigurationReference = C8CD1818F78D548D9BC61CD6 /* Pods-JRNavigationPageVCDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4L75765R87;
 				INFOPLIST_FILE = JRNavigationPageVCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JerryFans.JRNavigationPageVCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JRNavigationPageVCDemo/SwiftViewController/Controller/JRNavigationPageVCDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -414,12 +477,15 @@
 			baseConfigurationReference = 20D4FE6AA9FCB89ABA8A5054 /* Pods-JRNavigationPageVCDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4L75765R87;
 				INFOPLIST_FILE = JRNavigationPageVCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JerryFans.JRNavigationPageVCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JRNavigationPageVCDemo/SwiftViewController/Controller/JRNavigationPageVCDemo-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
