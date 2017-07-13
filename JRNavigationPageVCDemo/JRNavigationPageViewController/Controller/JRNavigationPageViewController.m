@@ -60,6 +60,14 @@
         if (titles) {
             _titles = titles();
         }
+        
+        if (self.viewControllers.count == 0 || self.titles.count == 0 || self.viewControllers.count != self.titles.count)
+        {
+            //不符合
+            NSAssert(NO, @"请查看viewControllers和titles数量,请保持一致");
+            return nil;
+        }
+        
     }
     
     return self;
