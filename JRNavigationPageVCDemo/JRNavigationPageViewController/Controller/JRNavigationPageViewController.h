@@ -29,8 +29,34 @@ typedef NSArray<UIViewController *>*(^viewControllersReturn)();
 
 
 
-
+/**
+ 初始化方法
+ 
+ @param viewControllers  控制器数组
+ @param titles 标题数组
+ @return 返回实例
+ */
 - (instancetype)initWithViewControlers:(viewControllersReturn)viewControllers andTitles:(titlesReturn)titles;
+
+
+
+
+/**
+ 设置标题初始颜色，以及选中颜色
+ 
+ @param normalColor 初始颜色
+ @param selectColor 选中颜色
+ */
+- (void)setupTitleNormalColor:(UIColor *)normalColor selectColor:(UIColor *)selectColor;
+
+
+/**
+ 设置标题字体
+ 
+ @param font 字体
+ */
+- (void)setupTitleFont:(UIFont *)font;
+
 
 
 /**

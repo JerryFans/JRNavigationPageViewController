@@ -12,14 +12,31 @@
 
 @property(nonatomic,copy) void (^itemChangeHandle)(NSInteger index);
 
+
 - (void)chanageTagWithIndex:(CGFloat)index;
 
 
 - (instancetype)initWithTitles:(NSArray *)titles;
 
 
+/**
+ 在某个item右上角显示红点提示 一般用户新消息新内容
+ 
+ @param index 数组下标
+ */
 - (void)showRedTipsWithIndex:(NSInteger)index;
 
+
+
+/**
+ 移除某个item右上角红点
+ 
+ @param index 数组下标
+ */
 - (void)removeRedTipsWithIndex:(NSInteger)index;
+
+
+ 
+- (void)setupNormalColor:(UIColor *)color selectColor:(UIColor *)selectColor font:(UIFont *)font;
 
 @end

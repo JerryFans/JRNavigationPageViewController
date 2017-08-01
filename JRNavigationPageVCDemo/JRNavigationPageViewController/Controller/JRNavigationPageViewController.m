@@ -154,8 +154,8 @@
     
     
     CGPoint offset = scrollView.contentOffset;
-    CGRect bounds = scrollView.frame;
-    CGFloat index = offset.x / bounds.size.width;
+    
+    CGFloat index = offset.x / JRScreenWidth;
     
     [self.tabView chanageTagWithIndex:index];
     
@@ -169,8 +169,8 @@
     }
     
     CGPoint offset = scrollView.contentOffset;
-    CGRect bounds = scrollView.frame;
-    CGFloat index = offset.x / bounds.size.width;
+    
+    CGFloat index = offset.x / JRScreenWidth;
     self.selectIndex = index;
     self.currentViewController = self.viewControllers[self.selectIndex];
     [self viewControllerDidAppear:self.currentViewController withIndex:self.selectIndex];
@@ -203,6 +203,15 @@
 }
 
 
+#pragma mark 设置UI
+
+- (void)setupTitleNormalColor:(UIColor *)normalColor selectColor:(UIColor *)selectColor{
+    [self.tabView setupNormalColor:normalColor selectColor:selectColor font:nil];
+}
+
+- (void)setupTitleFont:(UIFont *)font{
+    [self.tabView setupNormalColor:nil selectColor:nil font:font];
+}
 
 
 - (void)didReceiveMemoryWarning {

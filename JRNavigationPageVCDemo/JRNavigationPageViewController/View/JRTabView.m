@@ -11,6 +11,10 @@
 
 
 
+#define JRDefaultFont  15
+
+#define JRDefaultSpacing  15
+
 @interface JRTabView()
 
 
@@ -46,14 +50,14 @@
         
         CGFloat width = 0;
         for (NSString *title in titles) {
-            NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName, nil];
+            NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:[UIFont systemFontOfSize:JRDefaultFont],NSFontAttributeName, nil];
             CGSize size = [title sizeWithAttributes:dict];
             CGFloat buttonWidth = size.width;
             [self.widthArrays addObject:@(buttonWidth)];
             CGFloat maxWidth = [[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue];
             width += maxWidth;
             if (![title isEqualToString:[titles lastObject]]) {
-                width += 15;
+                width += JRDefaultSpacing;
             }
         }
         self.frame = CGRectMake(0, 0, width, 44);
@@ -93,7 +97,7 @@
         [button setTitleColor:[UIColor colorWithRed:51.0f / 255 green:51.0f / 255 blue:51.0f /255 alpha:1.0] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:42.0f / 255 green:187.0f / 255 blue:180.0f / 255 alpha:1.0] forState:UIControlStateHighlighted];
         [button setTitleColor:[UIColor colorWithRed:42.0f / 255 green:187.0f / 255 blue:180.0f / 255 alpha:1.0] forState:UIControlStateSelected];
-        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        button.titleLabel.font = [UIFont systemFontOfSize:JRDefaultFont];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         [button addTarget:self action:@selector(itemChanageAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -105,7 +109,7 @@
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
             make.height.mas_equalTo(44);
-            make.left.mas_equalTo(i * ([[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue] + 15));
+            make.left.mas_equalTo(i * ([[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue] + JRDefaultSpacing));
             if (i == (self.infoArray.count - 1)) {
                 make.right.mas_equalTo(0);
             }
@@ -150,7 +154,7 @@
     UIButton *button = [self.buttonArray objectAtIndex:index];
     button.selected = YES;
     
-    CGFloat padding = index * ([[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue] + 15);
+    CGFloat padding = index * ([[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue] + JRDefaultSpacing);
     
     [self.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(padding);
@@ -193,6 +197,50 @@
     
 }
 
+- (void)setupNormalColor:(UIColor *)color selectColor:(UIColor *)selectColor font:(UIFont *)font{
+    CGFloat width = 0;
+    if (font) {
+        [self.widthArrays removeAllObjects];
+    }
+    for (UIButton *button in self.buttonArray) {
+        
+        if (color) {
+            [button setTitleColor:color forState:UIControlStateNormal];
+        }
+        
+        if (selectColor) {
+            [button setTitleColor:selectColor forState:UIControlStateHighlighted];
+            [button setTitleColor:selectColor forState:UIControlStateSelected];
+        }
+        
+        if (font) {
+            button.titleLabel.font = font;
+            NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:font,NSFontAttributeName, nil];
+            CGSize size = [button.currentTitle sizeWithAttributes:dict];
+            CGFloat buttonWidth = size.width;
+            [self.widthArrays addObject:@(buttonWidth)];
+            CGFloat maxWidth = [[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue];
+            width += maxWidth;
+            if (![button isEqual:[self.buttonArray lastObject]]) {
+                width += JRDefaultSpacing;
+            }
+        }
+        
+    }
+    
+    if (width > 0) {
+        [self setFrame:CGRectMake(0, 0, width, 44)];
+        CGFloat maxWidth = [[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue];
+        [self.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(maxWidth);
+        }];
+    }
+    
+    if (selectColor) {
+        [self.lineView setBackgroundColor:selectColor];
+    }
+    
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

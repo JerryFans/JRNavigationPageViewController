@@ -33,6 +33,9 @@
     } andTitles:^NSArray<NSString *> *{
         return @[@"Object-C",@"Swift"];
     }];
+    [pageVc showRedTipsWithIndex:1];
+    [pageVc setupTitleFont:[UIFont systemFontOfSize:18]];
+    [pageVc setupTitleNormalColor:[UIColor blackColor] selectColor:[UIColor redColor]];
     
     UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:pageVc];
     self.window.rootViewController = navi;
