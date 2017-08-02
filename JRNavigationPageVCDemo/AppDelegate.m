@@ -25,19 +25,22 @@
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
-    JRNavigationPageViewController *pageVc = [[JRNavigationPageViewController alloc]initWithViewControlers:^NSArray<UIViewController *> *{
-        
-        return @[[[OCViewController alloc] init],[[SwiftViewController alloc]init]];
-        
-        
-    } andTitles:^NSArray<NSString *> *{
-        return @[@"Object-C",@"Swift"];
-    }];
-    [pageVc showRedTipsWithIndex:1];
-    [pageVc setupTitleFont:[UIFont systemFontOfSize:18]];
-    [pageVc setupTitleNormalColor:[UIColor blackColor] selectColor:[UIColor redColor]];
+    JRMenuClassItem *ocItem = [[JRMenuClassItem alloc]init];
+    ocItem.className = @"OCViewController";
     
-    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:pageVc];
+    JRMenuClassItem *swiftItem = [[JRMenuClassItem alloc]init];
+    swiftItem.className = @"OCViewController";
+    
+    JRNavigationPageViewController *pageVC = [[JRNavigationPageViewController alloc]initWithClassItems:^NSArray<JRMenuClassItem *> *{
+        return @[ocItem,swiftItem];
+    } andTitles:^NSArray<NSString *> *{
+        return @[@"精选",@"主题"];
+    }];
+    
+    [pageVC showRedTipsWithIndex:1];
+    
+    
+    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:pageVC];
     self.window.rootViewController = navi;
     //设定window的背景颜色clear
     self.window.backgroundColor = [UIColor clearColor];

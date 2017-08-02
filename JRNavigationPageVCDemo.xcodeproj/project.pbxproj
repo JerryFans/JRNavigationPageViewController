@@ -10,6 +10,7 @@
 		432E05F281A2F728ADB1FCA5 /* libPods-JRNavigationPageVCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9142EB5E904B946C2D371F60 /* libPods-JRNavigationPageVCDemo.a */; };
 		B42C40AD1F1718D200E033BD /* OCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42C40AC1F1718D200E033BD /* OCViewController.m */; };
 		B42C40B51F172B2400E033BD /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C40B41F172B2400E033BD /* SwiftViewController.swift */; };
+		B47FAA7A1F30BA2100994DE8 /* JRMenuClassItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B47FAA791F30BA2100994DE8 /* JRMenuClassItem.m */; };
 		B4804C471F14D51100E639AB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4804C461F14D51100E639AB /* AppDelegate.m */; };
 		B4804C4F1F14D51100E639AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4804C4E1F14D51100E639AB /* Assets.xcassets */; };
 		B4804C521F14D51100E639AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4804C501F14D51100E639AB /* LaunchScreen.storyboard */; };
@@ -26,6 +27,8 @@
 		B42C40AC1F1718D200E033BD /* OCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCViewController.m; sourceTree = "<group>"; };
 		B42C40B11F17268C00E033BD /* JRNavigationPageVCDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JRNavigationPageVCDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		B42C40B41F172B2400E033BD /* SwiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftViewController.swift; sourceTree = "<group>"; };
+		B47FAA781F30BA2100994DE8 /* JRMenuClassItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMenuClassItem.h; sourceTree = "<group>"; };
+		B47FAA791F30BA2100994DE8 /* JRMenuClassItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMenuClassItem.m; sourceTree = "<group>"; };
 		B4804C421F14D51100E639AB /* JRNavigationPageVCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JRNavigationPageVCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4804C451F14D51100E639AB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B4804C461F14D51100E639AB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 			children = (
 				B4804C5D1F14D77300E639AB /* JRNavigationPageViewController.h */,
 				B4804C5E1F14D77300E639AB /* JRNavigationPageViewController.m */,
+				B47FAA781F30BA2100994DE8 /* JRMenuClassItem.h */,
+				B47FAA791F30BA2100994DE8 /* JRMenuClassItem.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 			files = (
 				B4804C551F14D51100E639AB /* main.m in Sources */,
 				B4804C671F14D78900E639AB /* JRTabView.m in Sources */,
+				B47FAA7A1F30BA2100994DE8 /* JRMenuClassItem.m in Sources */,
 				B42C40AD1F1718D200E033BD /* OCViewController.m in Sources */,
 				B4804C651F14D78100E639AB /* JRNavigationPageViewController.m in Sources */,
 				B4804C661F14D78700E639AB /* JRTabScrollView.m in Sources */,

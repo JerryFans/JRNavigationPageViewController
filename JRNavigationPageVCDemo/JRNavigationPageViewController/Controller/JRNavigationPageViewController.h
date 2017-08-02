@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JRMenuClassItem.h"
 
 
 
 typedef NSArray<NSString *>*(^titlesReturn)();
 typedef NSArray<UIViewController *>*(^viewControllersReturn)();
-
+typedef NSArray<JRMenuClassItem *>*(^menuClassItemReturn)();
 
 
 @protocol JRNavigationPageDelegate <NSObject>
@@ -32,11 +33,11 @@ typedef NSArray<UIViewController *>*(^viewControllersReturn)();
 /**
  初始化方法
  
- @param viewControllers  控制器数组
+ @param menuClassItems  classItem数组
  @param titles 标题数组
  @return 返回实例
  */
-- (instancetype)initWithViewControlers:(viewControllersReturn)viewControllers andTitles:(titlesReturn)titles;
+- (instancetype)initWithClassItems:(menuClassItemReturn)menuClassItems andTitles:(titlesReturn)titles;
 
 
 

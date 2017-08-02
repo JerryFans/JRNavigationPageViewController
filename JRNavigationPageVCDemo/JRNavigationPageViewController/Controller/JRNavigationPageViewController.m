@@ -24,10 +24,10 @@
 
 @property(nonatomic,strong) JRTabScrollView  *scrollView;
 @property(nonatomic,strong) JRTabView  *tabView;
-
 @property(nonatomic,assign) NSInteger  selectIndex;
-@property(nonatomic,strong) NSArray<NSString *>  *titles;
 @property(nonatomic,strong) NSArray<UIViewController *>  *viewControllers;
+@property(nonatomic,strong) NSArray<JRMenuClassItem *>  *menuClassItems;
+@property(nonatomic,strong) NSArray<NSString *>  *titles;
 @property(nonatomic,strong) UIViewController  *currentViewController;
 
 @property(nonatomic,assign) BOOL  isMuteScroll;/**< 是否禁止滑动 */
@@ -52,19 +52,19 @@
     self.scrollView.scrollEnabled = !isMuteScroll;
 }
 
-- (instancetype)initWithViewControlers:(viewControllersReturn)viewControllers andTitles:(titlesReturn)titles{
+- (instancetype)initWithClassItems:(menuClassItemReturn)menuClassItems andTitles:(titlesReturn)titles{
     if (self = [super init]) {
-        if (viewControllers) {
-            _viewControllers = viewControllers();
+        if (menuClassItems) {
+            _menuClassItems = menuClassItems();
         }
         if (titles) {
-            _titles = titles();
+            _titles  = titles();
         }
         
-        if (self.viewControllers.count == 0 || self.titles.count == 0 || self.viewControllers.count != self.titles.count)
+        if (self.menuClassItems.count == 0 || self.titles.count == 0 || self.menuClassItems.count != self.titles.count)
         {
             //不符合
-            NSAssert(NO, @"请查看viewControllers和titles数量,请保持一致");
+            NSAssert(NO, @"请查看menuClassItems和titles数量,请保持一致");
             return nil;
         }
         
@@ -72,6 +72,7 @@
     
     return self;
 }
+
 
 - (JRTabView *)tabView{
     if (!_tabView) {
@@ -95,7 +96,7 @@
         _scrollView.showsVerticalScrollIndicator = NO;
         [_scrollView setBackgroundColor:[UIColor clearColor]];
         _scrollView.pagingEnabled = YES;
-        _scrollView.contentSize = CGSizeMake(JRScreenWidth * self.viewControllers.count, 0);
+        _scrollView.contentSize = CGSizeMake(JRScreenWidth * self.menuClassItems.count, 0);
         _scrollView.delegate = self;
         _scrollView.scrollsToTop = NO;
     }
@@ -103,11 +104,21 @@
 }
 
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    
+}
+
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    if (!self.childViewControllers.count) return;
+    if (!self.childViewControllers.count) [self setupViewContrllerAtIndex:self.selectIndex];
     
+    self.currentViewController = self.menuClassItems[self.selectIndex].getInstance;
+
     [self viewControllerDidAppear:self.currentViewController withIndex:self.selectIndex];
     
     
@@ -119,29 +130,35 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[[UIView alloc]init]];
     self.navigationItem.titleView = self.tabView;
-    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self.view addSubview:self.scrollView];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
     
-    for (int i = 0; i < self.viewControllers.count; i++) {
+    self.scrollView.contentSize = CGSizeMake(JRScreenWidth * self.menuClassItems.count, 0);
+    
+}
+
+
+- (void)setupViewContrllerAtIndex:(NSInteger)index{
+    
+    JRMenuClassItem *classItem = [self.menuClassItems objectAtIndex:index];
+    UIViewController *vc  = classItem.getInstance;
+    if (![self.childViewControllers containsObject:vc]) {
         
-        UIViewController *vc = self.viewControllers[i];
-        [self addChildViewController:vc];
-        [self.scrollView addSubview:vc.view];
-        [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-            make.width.mas_equalTo(JRScreenWidth);
-            make.bottom.equalTo(self.view.mas_bottom);
-            make.left.mas_equalTo(i * JRScreenWidth);
-        }];
+            [self addChildViewController:vc];
+            [self.scrollView addSubview:vc.view];
+            [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(0);
+                    make.width.mas_equalTo(JRScreenWidth);
+                    make.bottom.equalTo(self.view.mas_bottom);
+                    make.left.mas_equalTo(index * JRScreenWidth);
+                }];
         
         
     }
-    
-    self.currentViewController = self.viewControllers[self.selectIndex];
     
 }
 
@@ -155,7 +172,12 @@
     
     CGPoint offset = scrollView.contentOffset;
     
-    CGFloat index = offset.x / JRScreenWidth;
+    NSInteger index = offset.x / JRScreenWidth;
+    
+    
+    CGFloat setupPage = ((index == self.menuClassItems.count - 1) || (offset.x == 0)) ? index : index + 1;
+    
+    [self setupViewContrllerAtIndex:setupPage];
     
     [self.tabView chanageTagWithIndex:index];
     
@@ -169,13 +191,15 @@
     }
     
     CGPoint offset = scrollView.contentOffset;
-    
     CGFloat index = offset.x / JRScreenWidth;
     self.selectIndex = index;
-    self.currentViewController = self.viewControllers[self.selectIndex];
+    
+    self.currentViewController = self.menuClassItems[self.selectIndex].getInstance;
     [self viewControllerDidAppear:self.currentViewController withIndex:self.selectIndex];
     
 }
+
+
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     
@@ -183,8 +207,7 @@
         return;
     }
     
-    self.currentViewController = self.viewControllers[self.selectIndex];
-    
+    self.currentViewController = self.menuClassItems[self.selectIndex].getInstance;
     [self viewControllerDidAppear:self.currentViewController withIndex:self.selectIndex];
     
 }
