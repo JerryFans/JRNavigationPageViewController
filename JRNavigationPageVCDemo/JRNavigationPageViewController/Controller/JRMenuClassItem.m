@@ -9,7 +9,6 @@
 #import "JRMenuClassItem.h"
 #import <objc/runtime.h>
 #import <UIKit/UIKit.h>
-#import "JRNavigationPageVCDemo-Swift.h"
 
 @interface JRMenuClassItem()
 
