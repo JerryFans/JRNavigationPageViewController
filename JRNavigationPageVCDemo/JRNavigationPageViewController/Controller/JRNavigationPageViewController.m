@@ -80,7 +80,7 @@
         _tabView = [[JRTabView alloc]initWithTitles:self.titles];
         _tabView.center = self.view.center;
         [_tabView setItemChangeHandle:^(NSInteger index){
-            [weakSelf.scrollView setContentOffset:CGPointMake(index * JRScreenWidth, 0) animated:YES];
+            [weakSelf.scrollView setContentOffset:CGPointMake(index * JRScreenWidth, -64) animated:YES];
             weakSelf.selectIndex = index;
             
         }];
