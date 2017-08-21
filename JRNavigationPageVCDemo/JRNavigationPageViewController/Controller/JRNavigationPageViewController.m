@@ -20,6 +20,8 @@
 #define JRScreenHeight  [UIScreen mainScreen].bounds.size.height
 #define JRScreenWidth   [UIScreen mainScreen].bounds.size.width
 
+#define JRiOS11     [[UIDevice currentDevice].systemVersion floatValue] >= 11.0 ? YES : NO
+
 @interface JRNavigationPageViewController ()<UIScrollViewDelegate>
 
 @property(nonatomic,strong) JRTabScrollView  *scrollView;
@@ -78,7 +80,9 @@
     if (!_tabView) {
         JRWS(weakSelf);
         _tabView = [[JRTabView alloc]initWithTitles:self.titles];
-        _tabView.center = self.view.center;
+        if (!JRiOS11) {
+            _tabView.center = self.view.center;
+        }
         [_tabView setItemChangeHandle:^(NSInteger index){
             [weakSelf.scrollView setContentOffset:CGPointMake(index * JRScreenWidth, -64) animated:YES];
             weakSelf.selectIndex = index;
@@ -130,6 +134,14 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[[UIView alloc]init]];
     self.navigationItem.titleView = self.tabView;
+    if (JRiOS11) {
+        [self.tabView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+            make.height.mas_equalTo(44);
+        }];
+    }
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self.view addSubview:self.scrollView];
