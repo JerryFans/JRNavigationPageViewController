@@ -20,7 +20,7 @@
 #define JRScreenHeight  [UIScreen mainScreen].bounds.size.height
 #define JRScreenWidth   [UIScreen mainScreen].bounds.size.width
 
-#define JRiOS11     [[UIDevice currentDevice].systemVersion floatValue] >= 11.0 ? YES : NO
+#define JRiOS11    ( [[UIDevice currentDevice].systemVersion floatValue] >= 11.0 ) ? YES : NO
 
 @interface JRNavigationPageViewController ()<UIScrollViewDelegate>
 
