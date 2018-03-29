@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface JRMenuClassItem : NSObject
 
@@ -16,5 +17,7 @@
 @property(nonatomic,strong) NSDictionary  *propertyDict;
 
 @property(nonatomic,strong,getter=getInstance) id  getInstance;
+
+@property (nonatomic, strong) UIViewController *vc;
 
 @end

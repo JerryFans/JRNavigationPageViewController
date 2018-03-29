@@ -86,7 +86,6 @@
         [_tabView setItemChangeHandle:^(NSInteger index){
             [weakSelf.scrollView setContentOffset:CGPointMake(index * JRScreenWidth, -64) animated:YES];
             weakSelf.selectIndex = index;
-            
         }];
     }
     return _tabView;
@@ -128,13 +127,16 @@
     
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[[UIView alloc]init]];
     self.navigationItem.titleView = self.tabView;
+    
     if (JRiOS11) {
+        [self.navigationController.navigationBar addSubview:self.tabView];
         [self.tabView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(0);
             make.top.mas_equalTo(0);

@@ -11,9 +11,9 @@
 
 
 
-typedef NSArray<NSString *>*(^titlesReturn)();
-typedef NSArray<UIViewController *>*(^viewControllersReturn)();
-typedef NSArray<JRMenuClassItem *>*(^menuClassItemReturn)();
+typedef NSArray<NSString *>*(^titlesReturn)(void);
+typedef NSArray<UIViewController *>*(^viewControllersReturn)(void);
+typedef NSArray<JRMenuClassItem *>*(^menuClassItemReturn)(void);
 
 
 @protocol JRNavigationPageDelegate <NSObject>

@@ -19,11 +19,14 @@
 @implementation JRMenuClassItem
 
 - (id)getInstance{
-    return self.instance;
+    if (self.vc) {
+        return self.vc;
+    } else {
+        return self.instance;
+    }
 }
 
 - (id)instance{
-    
     if (!_instance) {
         if (!self.className) {
             NSAssert(NO, @"没有找到类名");
@@ -39,16 +42,12 @@
             // 注册你创建的这个类
             objc_registerClassPair(newClass);
         }
-        
         if ([newClass isSubclassOfClass:[UIViewController class]]) {
             _instance = [[newClass alloc]init];
-            
             if (self.propertyDict) {
-                
                 u_int count;
                 objc_property_t * properties  = class_copyPropertyList(newClass, &count);
                 for (int i=0; i<count; i++) {
-                    
                     objc_property_t property = properties[i];
                     const char *name = property_getName(property);
                     id value = [self.propertyDict objectForKey:[NSString stringWithUTF8String:name]];
@@ -57,15 +56,10 @@
                     }
                 }
                 free(properties);
-                
             }
-            
         }
-        
     }
-    
     return _instance;
-    
 }
 
 @end

@@ -11,9 +11,9 @@
 
 
 
-#define JRDefaultFont  15
-
-#define JRDefaultSpacing  15
+#define JRDefaultFont  17
+#define JRDefaultSpacing  103
+#define JRDefaultLineWidth 22
 
 @interface JRTabView()
 
@@ -23,6 +23,7 @@
 @property(nonatomic,strong) NSMutableArray  *widthArrays;
 @property(nonatomic,strong) UIView  *lineView;
 @property(nonatomic,strong) NSMutableArray  *redTipsArrays;
+@property (nonatomic, assign) BOOL isSettingBottomLineWidth;
 
 
 @end
@@ -44,10 +45,8 @@
     return _widthArrays;
 }
 
-- (instancetype)initWithTitles:(NSArray *)titles{
-    
+- (instancetype)initWithTitles:(NSArray *)titles WithItemSpacing:(CGFloat)itemSpacing {
     if (self = [super init]) {
-        
         CGFloat width = 0;
         for (NSString *title in titles) {
             NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:[UIFont systemFontOfSize:JRDefaultFont],NSFontAttributeName, nil];
@@ -57,25 +56,26 @@
             CGFloat maxWidth = [[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue];
             width += maxWidth;
             if (![title isEqualToString:[titles lastObject]]) {
-                width += JRDefaultSpacing;
+                CGFloat spacing = itemSpacing > 0 ? itemSpacing : JRDefaultSpacing;
+                width += spacing;
             }
         }
         self.frame = CGRectMake(0, 0, width, 44);
         _infoArray = titles;
         [self configSubView];
-        
-        
     }
-    
     return self;
-    
+}
+
+- (instancetype)initWithTitles:(NSArray *)titles{
+    return [self initWithTitles:titles WithItemSpacing:0];
 }
 
 
 - (UIView *)lineView{
     if (!_lineView) {
         _lineView = [[UIView alloc]init];
-        [_lineView setBackgroundColor:[UIColor colorWithRed:42.0f / 255 green:187.0f / 255 blue:180.0f / 255 alpha:1.0]];
+        [_lineView setBackgroundColor:[UIColor whiteColor]];
     }
     return _lineView;
 }
@@ -94,9 +94,9 @@
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:self.infoArray[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:51.0f / 255 green:51.0f / 255 blue:51.0f /255 alpha:1.0] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:42.0f / 255 green:187.0f / 255 blue:180.0f / 255 alpha:1.0] forState:UIControlStateHighlighted];
-        [button setTitleColor:[UIColor colorWithRed:42.0f / 255 green:187.0f / 255 blue:180.0f / 255 alpha:1.0] forState:UIControlStateSelected];
+        [button setTitleColor:[UIColor colorWithRed:173.0f / 255 green:174.0f / 255 blue:175.0f /255 alpha:1.0] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         button.titleLabel.font = [UIFont systemFontOfSize:JRDefaultFont];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         [button addTarget:self action:@selector(itemChanageAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -132,15 +132,18 @@
     
     [self addSubview:self.lineView];
     
+    CGFloat firstButtonWidth = [self.widthArrays[0] intValue];
+    
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.left.mas_equalTo((firstButtonWidth - JRDefaultLineWidth) / 2);
         make.height.mas_equalTo(2);
-        make.width.mas_equalTo([self.widthArrays[0] intValue]);
+        make.width.mas_equalTo(JRDefaultLineWidth);
     }];
     
 }
 
-- (void)chanageTagWithIndex:(CGFloat)index{
+- (void)chanageTagWithIndex:(NSInteger)index{
     
     
     if (CGRectEqualToRect(self.lineView.frame, CGRectZero)) {
@@ -154,7 +157,8 @@
     UIButton *button = [self.buttonArray objectAtIndex:index];
     button.selected = YES;
     
-    CGFloat padding = index * ([[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue] + JRDefaultSpacing);
+    
+    CGFloat padding = index * ([[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue] + JRDefaultSpacing) + (([[self.widthArrays valueForKeyPath:@"@max.floatValue"] floatValue]  - JRDefaultLineWidth) / 2);
     
     [self.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(padding);
@@ -241,13 +245,5 @@
     }
     
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

@@ -12,11 +12,13 @@
 
 @property(nonatomic,copy) void (^itemChangeHandle)(NSInteger index);
 
-
-- (void)chanageTagWithIndex:(CGFloat)index;
+- (void)chanageTagWithIndex:(NSInteger)index;
 
 
 - (instancetype)initWithTitles:(NSArray *)titles;
+
+- (instancetype)initWithTitles:(NSArray *)titles WithItemSpacing:(CGFloat)itemSpacing;
+
 
 
 /**

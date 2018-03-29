@@ -34,22 +34,36 @@
     JRNavigationPageViewController *pageVC = [[JRNavigationPageViewController alloc]initWithClassItems:^NSArray<JRMenuClassItem *> *{
         return @[ocItem,swiftItem];
     } andTitles:^NSArray<NSString *> *{
-        return @[@"精选",@"主题"];
+        return @[@"附近",@"人气"];
     }];
-    
-    [pageVC showRedTipsWithIndex:1];
     
     
     UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:pageVC];
-    self.window.rootViewController = navi;
+    navi.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:0];
+    
+    UINavigationController *navi1 = [[UINavigationController alloc]initWithRootViewController:[[OCViewController alloc] init]];
+    navi1.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
+    UINavigationController *navi2 = [[UINavigationController alloc]initWithRootViewController:[[OCViewController alloc] init]];
+    navi2.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemRecents tag:0];
+    UINavigationController *navi3 = [[UINavigationController alloc]initWithRootViewController:[[OCViewController alloc] init]];
+    navi3.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:0];
+    
+    
+    UITabBarController *tabbar = [[UITabBarController alloc] init];
+    [tabbar setViewControllers:@[navi,navi1,navi2,navi3]];
+    [tabbar.tabBar setBackgroundColor:[UIColor whiteColor]];
+    
+   
+    self.window.rootViewController = tabbar;
     //设定window的背景颜色clear
     self.window.backgroundColor = [UIColor clearColor];
     //显示
     [self.window makeKeyAndVisible];
     
     
-    [[UINavigationBar appearance]setBackgroundColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance]setBackgroundColor:[UIColor blackColor]];
+    [[UINavigationBar appearance]setBarTintColor:[UIColor blackColor]];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     return YES;
 }
